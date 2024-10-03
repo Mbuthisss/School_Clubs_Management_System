@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "548290626966",
+    "project_id": "school-clubs-management-system",
+    "storage_bucket": "school-clubs-management-system.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548290626966:android:54be08f1724482a2b9c9b7",
+        "android_client_info": {
+          "package_name": "com.example.schoolclubsmanagementsystem"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEQtUvNRPg4VM1BHM8miAnKzg1R5igJ7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
