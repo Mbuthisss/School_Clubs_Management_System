@@ -50,10 +50,18 @@ dependencies {
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
 
-
-    // TODO: Add the dependencies for Firebase products you want to use
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation("com.google.firebase:firebase-analytics")
+
+
+    //M-Pesa Gradle Files
+    // OkHttp for HTTP requests
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.1")
+
+    // For JSON handling
+    implementation ("com.google.code.gson:gson:2.8.7")
+
 
 
     // Add the dependencies for any other desired Firebase products
