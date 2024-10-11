@@ -9,7 +9,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.FirebaseApp;
-import com.example.schoolclubsmanagementsystem.database.Authentication;
+import com.example.schoolclubsmanagementsystem.user.Authentication;
 
 public class MainActivity extends AppCompatActivity {
 
