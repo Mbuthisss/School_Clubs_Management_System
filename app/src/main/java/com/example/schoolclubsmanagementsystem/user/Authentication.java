@@ -1,4 +1,4 @@
-package com.example.schoolclubsmanagementsystem.database;
+package com.example.schoolclubsmanagementsystem.user;
 
 import android.app.Activity;
 import android.util.Log;
