@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/group1" >
+
+        <item
+            android:icon="@drawable/home"
+            android:id="@+id/home"
+            android:title="Home" />
+
+        <item
+            android:icon="@drawable/club_list"
+            android:id="@+id/clubs_list"
+            android:title="Clubs List" />
+
+        <item
+            android:icon="@drawable/my_clubs"
+            android:id="@+id/my_clubs"
+            android:title="My Clubs" />
+
+    </group>
+
+    <group
+        android:id="@+id/group2" >
+
+        <item
+            android:icon="@drawable/profile"
+            android:id="@+id/profile"
+            android:title="Profile" />
+
+    </group>
+
+    <group
+        android:id="@+id/group3" >
+
+        <item
+            android:icon="@drawable/member_app"
+            android:id="@+id/member_app"
+            android:title="Member Applications" />
+
+        <item
+            android:icon="@drawable/notifications"
+            android:id="@+id/nots"
+            android:title="Notifications" />
+
+        <item
+            android:icon="@drawable/payments"
+            android:id="@+id/payment"
+            android:title="Payment" />
+
+    </group>
+
+    <group
+        android:id="@+id/group4" >
+
+        <item
+            android:icon="@drawable/help"
+            android:id="@+id/help"
+            android:title="Help" />
+
+        <item
+            android:icon="@drawable/feedback"
+            android:id="@+id/feedback"
+            android:title="Feedback" />
+
+    </group>
+
+    <group
+        android:id="@+id/group5" >
+
+        <item
+            android:icon="@drawable/logout"
+            android:id="@+id/logout"
+            android:title="Logout" />
+
+    </group>
+
+</menu>
