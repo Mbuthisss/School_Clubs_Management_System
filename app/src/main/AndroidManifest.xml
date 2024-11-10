@@ -13,6 +13,17 @@
         android:theme="@style/Theme.SchoolClubsManagementSystem"
         tools:targetApi="31">
         <activity
+            android:name=".activities.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".adapters.NewsAdapter"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar.Fullscreen" />
+        <activity
+            android:name=".activities.HomeActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar.Fullscreen" />
+        <activity
             android:name=".activities.SignUp3"
             android:exported="false" />
         <activity

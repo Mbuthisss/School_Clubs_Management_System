@@ -1,5 +1,6 @@
 package com.example.schoolclubsmanagementsystem;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,13 +15,16 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.schoolclubsmanagementsystem.activities.HomeActivity;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
-    DrawerLayout drawerLayout;
-    ImageButton buttonDrawerToggle;
-    NavigationView navigationView;
+    protected DrawerLayout drawerLayout;
+    protected ImageButton buttonDrawerToggle;
+    protected NavigationView navigationView;
+    protected Intent intent;
+    protected Class page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.home) {
+                    page = HomeActivity.class;
+                    intent = new Intent(MainActivity.this, page);
+                    startActivity(intent);
                     Toast.makeText(MainActivity.this, "Home Clicked", Toast.LENGTH_SHORT).show();
 
                 } else if (itemId == R.id.clubs_list) {
