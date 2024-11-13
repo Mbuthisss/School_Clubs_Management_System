@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.schoolclubsmanagementsystem.activities.HomeActivity;
+import com.example.schoolclubsmanagementsystem.activities.ClubListActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity{

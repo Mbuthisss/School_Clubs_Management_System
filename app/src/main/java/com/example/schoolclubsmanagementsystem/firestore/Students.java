@@ -1,68 +1,81 @@
 package com.example.schoolclubsmanagementsystem.firestore;
 
+import android.util.Log;
+
+import com.example.schoolclubsmanagementsystem.models.Student;
 import com.google.firebase.firestore.FirebaseFirestore;
-import java.util.HashMap;
+
 import java.util.Map;
 
 public class Students {
+    private static final String TAG = "Students";
     private FirebaseFirestore db;
 
     public Students() {
         db = FirestoreInit.getFirestoreInstance();
     }
 
-    // Add a new student
-    public void addStudent(String studentId, String name, String email, String phone, String department) {
-        Map<String, Object> student = new HashMap<>();
-        student.put("studentId", studentId);
-        student.put("name", name);
-        student.put("email", email);
-        student.put("phone", phone);
-        student.put("department", department);
+    public interface FirestoreCallback<T> {
+        void onSuccess(T result);
 
-        db.collection("students").document(studentId).set(student)
+        void onFailure(Exception e);
+    }
+
+    // Add a new student
+    public void addStudent(Student student, FirestoreCallback<Void> callback) {
+
+        db.collection("students").document(student.getStudentId()).set(student)
                 .addOnSuccessListener(aVoid -> {
-                    System.out.println("Student added successfully!");
+                    Log.d(TAG, "Student added successfully!");
+                    callback.onSuccess(null);
                 })
                 .addOnFailureListener(e -> {
-                    System.out.println("Error adding student: " + e.getMessage());
+                    Log.e(TAG, "Error adding student: " + e.getMessage());
+                    callback.onFailure(e);
                 });
     }
 
     // Get student details
-    public void getStudent(String studentId) {
+    public void getStudent(String studentId, FirestoreCallback<Student> callback) {
         db.collection("students").document(studentId).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
-                        System.out.println(documentSnapshot.getData());
+                        Student student = documentSnapshot.toObject(Student.class);
+                        callback.onSuccess(student);
                     } else {
-                        System.out.println("No such student!");
+                        Log.d(TAG, "No such student!");
+                        callback.onFailure(new Exception("No such student"));
                     }
                 })
                 .addOnFailureListener(e -> {
-                    System.out.println("Error getting student: " + e.getMessage());
+                    Log.e(TAG, "Error getting student: " + e.getMessage());
+                    callback.onFailure(e);
                 });
     }
 
     // Update student details
-    public void updateStudent(String studentId, Map<String, Object> updates) {
+    public void updateStudent(String studentId, Map<String, Object> updates, FirestoreCallback<Void> callback) {
         db.collection("students").document(studentId).update(updates)
                 .addOnSuccessListener(aVoid -> {
-                    System.out.println("Student updated successfully!");
+                    Log.d(TAG, "Student updated successfully!");
+                    callback.onSuccess(null);
                 })
                 .addOnFailureListener(e -> {
-                    System.out.println("Error updating student: " + e.getMessage());
+                    Log.e(TAG, "Error updating student: " + e.getMessage());
+                    callback.onFailure(e);
                 });
     }
 
     // Delete student
-    public void deleteStudent(String studentId) {
+    public void deleteStudent(String studentId, FirestoreCallback<Void> callback) {
         db.collection("students").document(studentId).delete()
                 .addOnSuccessListener(aVoid -> {
-                    System.out.println("Student deleted successfully!");
+                    Log.d(TAG, "Student deleted successfully!");
+                    callback.onSuccess(null);
                 })
                 .addOnFailureListener(e -> {
-                    System.out.println("Error deleting student: " + e.getMessage());
+                    Log.e(TAG, "Error deleting student: " + e.getMessage());
+                    callback.onFailure(e);
                 });
     }
 }

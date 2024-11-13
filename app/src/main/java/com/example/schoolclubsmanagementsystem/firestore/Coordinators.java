@@ -1,67 +1,81 @@
 package com.example.schoolclubsmanagementsystem.firestore;
 
+import android.util.Log;
+
+import com.example.schoolclubsmanagementsystem.models.Coordinator;
 import com.google.firebase.firestore.FirebaseFirestore;
-import java.util.HashMap;
+
 import java.util.Map;
 
 public class Coordinators {
+    private static final String TAG = "Coordinators";
     private FirebaseFirestore db;
 
     public Coordinators() {
         db = FirestoreInit.getFirestoreInstance();
     }
 
-    // Add a coordinator
-    public void addCoordinator(String coordinatorId, String name, String email, String phoneNumber, String clubId) {
-        Map<String, Object> coordinator = new HashMap<>();
-        coordinator.put("name", name);
-        coordinator.put("email", email);
-        coordinator.put("phoneNumber", phoneNumber);
-        coordinator.put("clubId", clubId);
+    public interface FirestoreCallback<T> {
+        void onSuccess(T result);
 
-        db.collection("coordinators").document(coordinatorId).set(coordinator)
+        void onFailure(Exception e);
+    }
+
+    // Add a coordinator
+    public void addCoordinator(Coordinator coordinator, FirestoreCallback<Void> callback) {
+        db.collection("coordinators").document(coordinator.getCoordinatorId()).set(coordinator)
                 .addOnSuccessListener(aVoid -> {
-                    System.out.println("Coordinator added successfully!");
+                    Log.d(TAG, "Coordinator added successfully!");
+                    callback.onSuccess(null);
                 })
                 .addOnFailureListener(e -> {
-                    System.out.println("Error adding coordinator: " + e.getMessage());
+                    Log.e(TAG, "Error adding coordinator: " + e.getMessage());
+                    callback.onFailure(e);
                 });
     }
 
     // Get coordinator details
-    public void getCoordinator(String coordinatorId) {
+    public void getCoordinator(String coordinatorId, FirestoreCallback<Coordinator> callback) {
         db.collection("coordinators").document(coordinatorId).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
-                        System.out.println(documentSnapshot.getData());
+                        Coordinator coordinator = documentSnapshot.toObject(Coordinator.class);
+                        callback.onSuccess(coordinator);
                     } else {
-                        System.out.println("No such coordinator!");
+                        Log.d(TAG, "No such coordinator!");
+                        callback.onFailure(new Exception("No such coordinator"));
                     }
                 })
                 .addOnFailureListener(e -> {
-                    System.out.println("Error getting coordinator: " + e.getMessage());
+                    Log.e(TAG, "Error getting coordinator: " + e.getMessage());
+                    callback.onFailure(e);
                 });
     }
 
     // Update coordinator details
-    public void updateCoordinator(String coordinatorId, Map<String, Object> updates) {
+    public void updateCoordinator(String coordinatorId, Map<String, Object> updates, FirestoreCallback<Void> callback) {
         db.collection("coordinators").document(coordinatorId).update(updates)
                 .addOnSuccessListener(aVoid -> {
-                    System.out.println("Coordinator updated successfully!");
+                    Log.d(TAG, "Coordinator updated successfully!")
+                    ;
+                    callback.onSuccess(null);
                 })
                 .addOnFailureListener(e -> {
-                    System.out.println("Error updating coordinator: " + e.getMessage());
+                    Log.e(TAG, "Error updating coordinator: " + e.getMessage());
+                    callback.onFailure(e);
                 });
     }
 
     // Delete coordinator
-    public void deleteCoordinator(String coordinatorId) {
+    public void deleteCoordinator(String coordinatorId, FirestoreCallback<Void> callback) {
         db.collection("coordinators").document(coordinatorId).delete()
                 .addOnSuccessListener(aVoid -> {
-                    System.out.println("Coordinator deleted successfully!");
+                    Log.d(TAG, "Coordinator deleted successfully!");
+                    callback.onSuccess(null);
                 })
                 .addOnFailureListener(e -> {
-                    System.out.println("Error deleting coordinator: " + e.getMessage());
+                    Log.e(TAG, "Error deleting coordinator: " + e.getMessage());
+                    callback.onFailure(e);
                 });
     }
 }

@@ -13,6 +13,12 @@
         android:theme="@style/Theme.SchoolClubsManagementSystem"
         tools:targetApi="31">
         <activity
+            android:name=".activities.CreateClubActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ClubListActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ProfileActivity"
             android:exported="false" />
         <activity
