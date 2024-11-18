@@ -6,6 +6,8 @@ public class Student {
     private String email;
     private String phone;
     private String department;
+    private String gender;
+    private String dob;
 
     public Student() {
         //Required for firestore serialization/deserialization
@@ -49,5 +51,21 @@ public class Student {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 }

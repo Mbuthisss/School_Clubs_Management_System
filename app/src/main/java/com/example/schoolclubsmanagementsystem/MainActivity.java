@@ -61,6 +61,9 @@ public class MainActivity extends AppCompatActivity{
                     Toast.makeText(MainActivity.this, "Home Clicked", Toast.LENGTH_SHORT).show();
 
                 } else if (itemId == R.id.clubs_list) {
+                    page = ClubListActivity.class;
+                    intent = new Intent(MainActivity.this, page);
+                    startActivity(intent);
                     Toast.makeText(MainActivity.this, "Clubs List Clicked", Toast.LENGTH_SHORT).show();
 
                 } else if (itemId == R.id.my_clubs) {

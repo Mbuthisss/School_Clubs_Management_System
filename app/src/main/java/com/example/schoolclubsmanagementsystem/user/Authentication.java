@@ -13,35 +13,40 @@ import com.google.android.gms.tasks.Task;
 import androidx.annotation.NonNull;
 
 public class Authentication {
-    private FirebaseAuth mAuth;
+    private final FirebaseAuth mAuth;
 
     public Authentication() {
         mAuth = FirebaseAuth.getInstance();
     }
 
-    // Method for user sign-up
-    public void signUp(String email, String password, Activity activity) {
+    public interface AuthCallback {
+        void onSuccess();
+        void onFailure(Exception e);
+    }
+
+    // Method for user sign-up with callback
+    public void signUp(String email, String password, Activity activity, AuthCallback callback) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign up success
                             FirebaseUser user = mAuth.getCurrentUser();
                             Log.d("Auth", "createUserWithEmail:success");
                             Toast.makeText(activity, "Sign up successful!", Toast.LENGTH_SHORT).show();
+                            callback.onSuccess();
                         } else {
-                            // Sign up failed
                             Log.w("Auth", "createUserWithEmail:failure", task.getException());
                             Toast.makeText(activity, "Sign up failed: " + task.getException().getMessage(),
                                     Toast.LENGTH_LONG).show();
+                            callback.onFailure(task.getException());
                         }
                     }
                 });
     }
 
-    // Method for user login
-    public void signIn(String email, String password, Activity activity) {
+    // Method for user login with callback
+    public void signIn(String email, String password, Activity activity, AuthCallback callback) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -51,11 +56,13 @@ public class Authentication {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Log.d("Auth", "signInWithEmail:success");
                             Toast.makeText(activity, "Login successful!", Toast.LENGTH_SHORT).show();
+                            callback.onSuccess();
                         } else {
                             // Sign in failed
                             Log.w("Auth", "signInWithEmail:failure", task.getException());
                             Toast.makeText(activity, "Login failed: " + task.getException().getMessage(),
                                     Toast.LENGTH_LONG).show();
+                            callback.onFailure(task.getException());
                         }
                     }
                 });

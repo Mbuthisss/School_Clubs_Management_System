@@ -43,24 +43,25 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+    implementation(libs.material.v140)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
     // Import the Firebase BoM
-    implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
+    implementation(platform(libs.firebase.bom))
 
     // When using the BoM, don't specify versions in Firebase dependencies
-    implementation("com.google.firebase:firebase-analytics")
+    implementation(libs.firebase.analytics)
 
 
     //M-Pesa Gradle Files
     // OkHttp for HTTP requests
-    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
-    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.1")
+    implementation (libs.okhttp)
+    implementation (libs.logging.interceptor)
 
     // For JSON handling
-    implementation ("com.google.code.gson:gson:2.8.7")
+    implementation (libs.gson)
 
     //Country Picker
     implementation(libs.ccp)
