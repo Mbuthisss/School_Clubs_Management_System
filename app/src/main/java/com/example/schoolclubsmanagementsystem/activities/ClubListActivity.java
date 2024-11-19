@@ -1,27 +1,25 @@
 package com.example.schoolclubsmanagementsystem.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import com.example.schoolclubsmanagementsystem.MainActivity;
-import com.example.schoolclubsmanagementsystem.R;
-
-import android.content.Intent;
-import android.view.View;
-import android.widget.ImageView;
-
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.schoolclubsmanagementsystem.MainActivity;
+import com.example.schoolclubsmanagementsystem.R;
 import com.example.schoolclubsmanagementsystem.adapters.ClubAdapter;
 import com.example.schoolclubsmanagementsystem.firestore.Clubs;
 import com.example.schoolclubsmanagementsystem.models.Club;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +32,7 @@ public class ClubListActivity extends MainActivity {
     private Clubs clubsDb;
     private DrawerLayout drawerLayout;
     private ImageView createClubButton;
-
+    private String currentUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +47,7 @@ public class ClubListActivity extends MainActivity {
 
         drawerLayout = findViewById(R.id.main);
         createClubButton = findViewById(R.id.create_club_button);
+        buttonDrawerToggle = findViewById(R.id.buttonDrawerToggle);
 
         buttonDrawerToggle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,9 +71,10 @@ public class ClubListActivity extends MainActivity {
         // Initialize database and data list
         clubsDb = new Clubs();
         clubsList = new ArrayList<>();
+        currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         //Set up adapter
-        clubAdapter = new ClubAdapter(this, clubsList);
+        clubAdapter = new ClubAdapter(this, clubsList, currentUserId);
         clubRecyclerView.setAdapter(clubAdapter);
 
         // Load clubs from Firestore
@@ -92,7 +92,8 @@ public class ClubListActivity extends MainActivity {
 
             @Override
             public void onFailure(Exception e) {
-                //Handle failure
+                // Handle failure
+                e.printStackTrace();
             }
         });
     }

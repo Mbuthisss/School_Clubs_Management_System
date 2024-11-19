@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,11 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.schoolclubsmanagementsystem.MainActivity;
 import com.example.schoolclubsmanagementsystem.R;
 import com.example.schoolclubsmanagementsystem.user.Authentication;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText usernameInput, passwordInput;
+    private TextInputEditText usernameInput, passwordInput;
     private Button loginButton, signUpButton;
     private Authentication auth;
 

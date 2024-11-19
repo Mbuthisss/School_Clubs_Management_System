@@ -14,13 +14,27 @@
         android:paddingTop="60dp"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/create_club_button"
-            android:layout_width="50dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:contentDescription="Create Club"
-            android:scaleType="centerCrop"
-            android:src="@drawable/add" />
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/create_club_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/add" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:text="Add New Club"
+                android:textSize="20sp"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/club_recycler_view"

@@ -8,7 +8,7 @@
     <style name="Theme.SchoolClubsManagementSystem" parent="Base.Theme.SchoolClubsManagementSystem" />
 
     <!-- Define a custom theme -->
-    <style name="AppTheme.NoActionBar.Fullscreen" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.NoActionBar.Fullscreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowFullscreen">true</item>
     </style>
 

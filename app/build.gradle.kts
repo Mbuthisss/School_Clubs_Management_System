@@ -57,11 +57,11 @@ dependencies {
 
     //M-Pesa Gradle Files
     // OkHttp for HTTP requests
-    implementation (libs.okhttp)
-    implementation (libs.logging.interceptor)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 
     // For JSON handling
-    implementation (libs.gson)
+    implementation(libs.gson)
 
     //Country Picker
     implementation(libs.ccp)

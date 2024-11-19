@@ -2,6 +2,8 @@
 agp = "8.5.1"
 ccp = "2.5.0"
 firebaseBom = "33.6.0"
+firebaseUiFirestore = "8.0.1"
+googleFirebaseFirestore = "23.0.3"
 googleMaterial = "1.4.0"
 gson = "2.10.1"
 junit = "4.13.2"
@@ -21,6 +23,8 @@ okhttp = "4.9.1"
 ccp = { module = "com.hbb20:ccp", version.ref = "ccp" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-firestore-v2303 = { module = "com.google.firebase:firebase-firestore", version.ref = "googleFirebaseFirestore" }
+firebase-ui-firestore = { module = "com.firebaseui:firebase-ui-firestore", version.ref = "firebaseUiFirestore" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

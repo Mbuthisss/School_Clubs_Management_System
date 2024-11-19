@@ -1,16 +1,23 @@
 package com.example.schoolclubsmanagementsystem.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Club {
     private String clubId;
     private String name;
     private String description;
-    private int capacity;
     private String coordinator;
+    private int capacity;
+    private int currentMembers;
+    private List<String> members;
 
     public Club() {
-        //firestore serialization
+        this.members = new ArrayList<>();
+        this.currentMembers = 0; // Initialize with 0 for the coordinator
     }
 
+    // Getters and setters for all fields
     public String getClubId() {
         return clubId;
     }
@@ -35,6 +42,14 @@ public class Club {
         this.description = description;
     }
 
+    public String getCoordinator() {
+        return coordinator;
+    }
+
+    public void setCoordinator(String coordinator) {
+        this.coordinator = coordinator;
+    }
+
     public int getCapacity() {
         return capacity;
     }
@@ -43,11 +58,25 @@ public class Club {
         this.capacity = capacity;
     }
 
-    public String getCoordinator() {
-        return coordinator;
+    public int getCurrentMembers() {
+        return currentMembers;
     }
 
-    public void setCoordinator(String coordinator) {
-        this.coordinator = coordinator;
+    public void setCurrentMembers(int currentMembers) {
+        this.currentMembers = currentMembers;
+    }
+
+    public List<String> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<String> members) {
+        this.members = members;
+    }
+
+    public void addMember(String memberId) {
+        if (!members.contains(memberId)) {
+            members.add(memberId);
+        }
     }
 }
