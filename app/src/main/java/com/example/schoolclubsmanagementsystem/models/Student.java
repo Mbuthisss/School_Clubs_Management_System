@@ -4,6 +4,7 @@ public class Student {
     private String studentId;
     private String name;
     private String email;
+    private String username;
     private String phone;
     private String department;
     private String gender;
@@ -31,6 +32,14 @@ public class Student {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setEmail(String email) {

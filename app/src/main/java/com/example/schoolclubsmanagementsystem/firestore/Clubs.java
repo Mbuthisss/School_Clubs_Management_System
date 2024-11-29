@@ -81,4 +81,20 @@ public class Clubs {
                     callback.onFailure(e);
                 });
     }
+
+    //Get club details
+    public void getClub(String clubId, FirestoreCallback<Club> callback) {
+        db.collection("clubs").document(clubId).get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                Club club = documentSnapshot.toObject(Club.class);
+                callback.onSuccess(club);
+            } else {
+                Log.d(TAG, "No such club!");
+                callback.onFailure(new Exception("No such club"));
+            }
+        }).addOnFailureListener(e -> {
+            Log.e(TAG, "Error getting club: " + e.getMessage());
+            callback.onFailure(e);
+        });
+    }
 }

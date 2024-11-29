@@ -13,6 +13,9 @@
         android:theme="@style/Theme.SchoolClubsManagementSystem"
         tools:targetApi="31">
         <activity
+            android:name=".activities.MyClubsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.CreateClubActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar.Fullscreen" />
@@ -23,7 +26,7 @@
         <activity
             android:name=".activities.ProfileActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>
+            android:theme="@style/AppTheme.NoActionBar.Fullscreen" />
         <activity
             android:name=".adapters.NewsAdapter"
             android:exported="false"
