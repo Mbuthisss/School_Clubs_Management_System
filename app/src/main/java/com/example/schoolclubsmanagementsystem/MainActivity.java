@@ -17,6 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.schoolclubsmanagementsystem.activities.HomeActivity;
 import com.example.schoolclubsmanagementsystem.activities.ClubListActivity;
+import com.example.schoolclubsmanagementsystem.activities.MyClubsActivity;
 import com.example.schoolclubsmanagementsystem.activities.ProfileActivity;
 import com.google.android.material.navigation.NavigationView;
 
@@ -68,6 +69,9 @@ public class MainActivity extends AppCompatActivity{
                     Toast.makeText(MainActivity.this, "Clubs List Clicked", Toast.LENGTH_SHORT).show();
 
                 } else if (itemId == R.id.my_clubs) {
+                    page = MyClubsActivity.class;
+                    intent = new Intent(MainActivity.this, page);
+                    startActivity(intent);
                     Toast.makeText(MainActivity.this, "My Clubs Clicked", Toast.LENGTH_SHORT).show();
 
                 } else if (itemId == R.id.profile) {

@@ -22,7 +22,6 @@ public class Students {
 
     public interface FirestoreCallback<T> {
         void onSuccess(T result);
-
         void onFailure(Exception e);
     }
 
@@ -169,5 +168,21 @@ public class Students {
             Log.e(TAG, "Error getting student clubs: " + e.getMessage());
             callback.onFailure(e);
         });
+    }
+
+    // Get clubs a student coordinates
+    public void getCoordinatedClubs(String studentId, FirestoreCallback<List<String>> callback) {
+        db.collection("clubs").whereEqualTo("coordinator", studentId).get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<String> coordinatedClubIds = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        coordinatedClubIds.add(document.getId());
+                    }
+                    callback.onSuccess(coordinatedClubIds);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error getting coordinated clubs: " + e.getMessage());
+                    callback.onFailure(e);
+                });
     }
 }

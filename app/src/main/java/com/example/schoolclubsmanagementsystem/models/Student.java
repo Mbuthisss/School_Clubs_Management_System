@@ -1,5 +1,7 @@
 package com.example.schoolclubsmanagementsystem.models;
 
+import java.util.List;
+
 public class Student {
     private String studentId;
     private String name;
@@ -9,6 +11,7 @@ public class Student {
     private String department;
     private String gender;
     private String dob;
+    private List<String> clubs;
 
     public Student() {
         //Required for firestore serialization/deserialization
@@ -76,5 +79,13 @@ public class Student {
 
     public void setDob(String dob) {
         this.dob = dob;
+    }
+
+    public List<String> getClubs() {
+        return clubs;
+    }
+
+    public void setClubs(List<String> clubs) {
+        this.clubs = clubs;
     }
 }

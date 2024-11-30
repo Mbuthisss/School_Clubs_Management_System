@@ -13,6 +13,9 @@
         android:theme="@style/Theme.SchoolClubsManagementSystem"
         tools:targetApi="31">
         <activity
+            android:name=".activities.ClubDashboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.MyClubsActivity"
             android:exported="false" />
         <activity

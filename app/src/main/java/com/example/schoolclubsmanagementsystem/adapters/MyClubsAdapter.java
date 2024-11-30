@@ -1,44 +1,43 @@
 package com.example.schoolclubsmanagementsystem.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.schoolclubsmanagementsystem.R;
+import com.example.schoolclubsmanagementsystem.activities.ClubDashboardActivity;
 import com.example.schoolclubsmanagementsystem.models.Club;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
-public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.ClubViewHolder> {
+public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubsViewHolder> {
     private Context context;
     private List<Club> clubsList;
-    private String currentUserId;
     private FirebaseFirestore firestore;
 
-    public ClubAdapter(Context context, List<Club> clubsList, String currentUserId) {
+    public MyClubsAdapter(Context context, List<Club> clubsList) {
         this.context = context;
         this.clubsList = clubsList;
-        this.currentUserId = currentUserId;
         this.firestore = FirebaseFirestore.getInstance();
     }
 
     @NonNull
     @Override
-    public ClubViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyClubsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_club, parent, false);
-        return new ClubViewHolder(view);
+        return new MyClubsViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ClubViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyClubsViewHolder holder, int position) {
         Club club = clubsList.get(position);
         holder.clubNameTextView.setText(club.getName());
         holder.clubDescriptionTextView.setText(club.getDescription());
@@ -55,31 +54,14 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.ClubViewHolder
         holder.clubCapacityTextView.setText("Capacity: " + club.getCapacity());
         holder.clubMembersTextView.setText("Members: " + club.getCurrentMembers()); // Show actual current members
 
-        holder.joinButton.setOnClickListener(v -> {
-            if (club.getClubId() == null) {
-                Toast.makeText(context, "Error: Club ID is null", Toast.LENGTH_SHORT).show();
-                return;
-            }
+        // Hide join button
+        holder.joinButton.setVisibility(View.GONE);
 
-            if (club.getCoordinator().equals(currentUserId)) {
-                Toast.makeText(context, "You cannot join your own club", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (club.getMembers().contains(currentUserId)) {
-                Toast.makeText(context, "You have already joined this club", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (club.getCurrentMembers() < club.getCapacity()) {
-                // Add current user to members list
-                club.addMember(currentUserId);
-                club.setCurrentMembers(club.getCurrentMembers() + 1);
-                Toast.makeText(context, "Joined " + club.getName(), Toast.LENGTH_SHORT).show();
-                notifyDataSetChanged(); // Update the view to reflect changes
-            } else {
-                Toast.makeText(context, "Club is full", Toast.LENGTH_SHORT).show();
-            }
+        // Navigate to club dashboard on item click
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ClubDashboardActivity.class); // Placeholder for Club Dashboard activity
+            intent.putExtra("clubId", club.getClubId());
+            context.startActivity(intent);
         });
     }
 
@@ -88,7 +70,7 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.ClubViewHolder
         return clubsList.size();
     }
 
-    public static class ClubViewHolder extends RecyclerView.ViewHolder {
+    public static class MyClubsViewHolder extends RecyclerView.ViewHolder {
         TextView clubNameTextView;
         TextView clubDescriptionTextView;
         TextView clubCoordinatorTextView;
@@ -96,7 +78,7 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.ClubViewHolder
         TextView clubMembersTextView;
         Button joinButton;
 
-        public ClubViewHolder(@NonNull View itemView) {
+        public MyClubsViewHolder(@NonNull View itemView) {
             super(itemView);
             clubNameTextView = itemView.findViewById(R.id.club_name_text_view);
             clubDescriptionTextView = itemView.findViewById(R.id.club_description_text_view);
