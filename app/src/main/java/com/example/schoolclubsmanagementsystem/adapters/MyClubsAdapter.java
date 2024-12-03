@@ -59,7 +59,7 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubsV
 
         // Navigate to club dashboard on item click
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ClubDashboardActivity.class); // Placeholder for Club Dashboard activity
+            Intent intent = new Intent(context, ClubDashboardActivity.class);
             intent.putExtra("clubId", club.getClubId());
             context.startActivity(intent);
         });
