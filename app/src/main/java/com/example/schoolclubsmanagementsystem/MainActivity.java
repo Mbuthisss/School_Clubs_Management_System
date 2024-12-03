@@ -1,108 +1,53 @@
 package com.example.schoolclubsmanagementsystem;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
-import com.example.schoolclubsmanagementsystem.activities.HomeActivity;
-import com.example.schoolclubsmanagementsystem.activities.ClubListActivity;
-import com.example.schoolclubsmanagementsystem.activities.MyClubsActivity;
-import com.example.schoolclubsmanagementsystem.activities.ProfileActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
-    protected DrawerLayout drawerLayout;
-    protected ImageButton buttonDrawerToggle;
-    protected NavigationView navigationView;
-    protected Intent intent;
-    protected Class page;
+    private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-        drawerLayout = findViewById(R.id.main);
-        buttonDrawerToggle = findViewById(R.id.buttonDrawerToggle);
-        navigationView = findViewById(R.id.navigationView);
+        setSupportActionBar(findViewById(R.id.toolbar));
 
-        buttonDrawerToggle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.open();
+        DrawerLayout drawer = findViewById(R.id.main);
+        NavigationView navigationView = findViewById(R.id.navigationView);
+
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.home, R.id.clubs_list, R.id.my_clubs, R.id.profile, R.id.help, R.id.feedback, R.id.logout)
+                .setOpenableLayout(drawer)
+                .build();
+
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navController);
+
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.logout) {
+                // Handle logout
+                return true;
             }
+            NavigationUI.onNavDestinationSelected(item, navController);
+            drawer.closeDrawer(navigationView);
+            return true;
         });
+    }
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemId = item.getItemId();
-
-                if (itemId == R.id.home) {
-                    page = HomeActivity.class;
-                    intent = new Intent(MainActivity.this, page);
-                    startActivity(intent);
-                    Toast.makeText(MainActivity.this, "Home Clicked", Toast.LENGTH_SHORT).show();
-
-                } else if (itemId == R.id.clubs_list) {
-                    page = ClubListActivity.class;
-                    intent = new Intent(MainActivity.this, page);
-                    startActivity(intent);
-                    Toast.makeText(MainActivity.this, "Clubs List Clicked", Toast.LENGTH_SHORT).show();
-
-                } else if (itemId == R.id.my_clubs) {
-                    page = MyClubsActivity.class;
-                    intent = new Intent(MainActivity.this, page);
-                    startActivity(intent);
-                    Toast.makeText(MainActivity.this, "My Clubs Clicked", Toast.LENGTH_SHORT).show();
-
-                } else if (itemId == R.id.profile) {
-                    page = ProfileActivity.class;
-                    intent = new Intent(MainActivity.this, page);
-                    startActivity(intent);
-                    Toast.makeText(MainActivity.this, "Profile Clicked", Toast.LENGTH_SHORT).show();
-
-                } else if (itemId == R.id.member_app) {
-                    Toast.makeText(MainActivity.this, "Member Applications Clicked", Toast.LENGTH_SHORT).show();
-
-                } else if (itemId == R.id.nots) {
-                    Toast.makeText(MainActivity.this, "Notifications Clicked", Toast.LENGTH_SHORT).show();
-
-                } else if (itemId == R.id.payment) {
-                    Toast.makeText(MainActivity.this, "Payments Clicked", Toast.LENGTH_SHORT).show();
-
-                } else if (itemId == R.id.help) {
-                    Toast.makeText(MainActivity.this, "Help Clicked", Toast.LENGTH_SHORT).show();
-
-                } else if (itemId == R.id.feedback) {
-                    Toast.makeText(MainActivity.this, "Feedback Clicked", Toast.LENGTH_SHORT).show();
-
-                } else if (itemId == R.id.logout) {
-                    Toast.makeText(MainActivity.this, "Logout Clicked", Toast.LENGTH_SHORT).show();
-                }
-
-                drawerLayout.close();
-
-                return false;
-            }
-        });
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }
 }

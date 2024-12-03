@@ -17,26 +17,7 @@
             android:exported="false"
             android:label="@string/title_activity_club_dashboard" />
         <activity
-            android:name=".activities.MyClubsActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.CreateClubActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar.Fullscreen" />
-        <activity
-            android:name=".activities.ClubListActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar.Fullscreen" />
-        <activity
-            android:name=".activities.ProfileActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar.Fullscreen" />
-        <activity
-            android:name=".adapters.NewsAdapter"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar.Fullscreen" />
-        <activity
-            android:name=".activities.HomeActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar.Fullscreen" />
         <activity

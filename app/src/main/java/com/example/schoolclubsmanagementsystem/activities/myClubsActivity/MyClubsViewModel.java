@@ -1,14 +1,13 @@
-package com.example.schoolclubsmanagementsystem.activities;
+package com.example.schoolclubsmanagementsystem.activities.myClubsActivity;
 
-import android.os.Bundle;
+import android.app.Application;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
-import com.example.schoolclubsmanagementsystem.R;
-import com.example.schoolclubsmanagementsystem.adapters.MyClubsAdapter;
 import com.example.schoolclubsmanagementsystem.firestore.Clubs;
 import com.example.schoolclubsmanagementsystem.firestore.Students;
 import com.example.schoolclubsmanagementsystem.models.Club;
@@ -20,36 +19,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class MyClubsActivity extends AppCompatActivity {
+public class MyClubsViewModel extends AndroidViewModel {
 
-    private RecyclerView clubsRecyclerView;
-    private MyClubsAdapter myClubsAdapter;
-    private List<Club> clubsList;
-    private Students studentsDb;
-    private Authentication auth;
+    private final MutableLiveData<List<Club>> clubs = new MutableLiveData<>();
+    private final Students studentsDb;
+    private final Authentication auth;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_clubs); // Use activity_my_clubs.xml
-
-        // Initialize instances
-        auth = new Authentication();
+    public MyClubsViewModel(@NonNull Application application) {
+        super(application);
         studentsDb = new Students();
-        FirebaseUser currentUser = auth.getCurrentUser();
-
-        // Initialize RecyclerView
-        clubsRecyclerView = findViewById(R.id.clubs_recycler_view);
-        clubsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        clubsList = new ArrayList<>();
-        myClubsAdapter = new MyClubsAdapter(this, clubsList);
-        clubsRecyclerView.setAdapter(myClubsAdapter);
-
-        // Load clubs the student has joined and coordinates
-        loadStudentClubs(currentUser);
+        auth = new Authentication();
     }
 
-    private void loadStudentClubs(FirebaseUser currentUser) {
+    public LiveData<List<Club>> getClubs() {
+        return clubs;
+    }
+
+    public void loadStudentClubs(FirebaseUser currentUser) {
         if (currentUser != null) {
             Set<String> allClubIds = new HashSet<>();
 
@@ -64,7 +50,7 @@ public class MyClubsActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Exception e) {
-                    Toast.makeText(MyClubsActivity.this, "Failed to load clubs: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication(), "Failed to load clubs: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -79,14 +65,14 @@ public class MyClubsActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Exception e) {
-                    Toast.makeText(MyClubsActivity.this, "Failed to load coordinated clubs: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication(), "Failed to load coordinated clubs: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
     }
 
     private void fetchClubsDetails(Set<String> clubIds) {
-        clubsList.clear();
+        List<Club> clubsList = new ArrayList<>();
         for (String clubId : clubIds) {
             // Assuming Clubs class has a method to fetch club details by club ID
             new Clubs().getClub(clubId, new Clubs.FirestoreCallback<Club>() {
@@ -94,13 +80,13 @@ public class MyClubsActivity extends AppCompatActivity {
                 public void onSuccess(Club club) {
                     if (club != null) {
                         clubsList.add(club);
-                        myClubsAdapter.notifyDataSetChanged();
+                        clubs.setValue(clubsList);
                     }
                 }
 
                 @Override
                 public void onFailure(Exception e) {
-                    Toast.makeText(MyClubsActivity.this, "Failed to load club details: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication(), "Failed to load club details: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

@@ -6,17 +6,19 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:openDrawer="start"
-    tools:context=".MainActivity">
+    android:fitsSystemWindows="true">
 
     <include
-        layout="@layout/activity_main_content" />
+        android:id="@+id/app_bar_main"
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:dividerInsetStart="25dp"
-        app:itemIconPadding="25dp"
+        android:fitsSystemWindows="true"
         app:menu="@menu/drawer_items"
         app:headerLayout="@layout/drawer_header"
         android:layout_gravity="start" />
