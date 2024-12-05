@@ -1,38 +1,35 @@
 package com.example.schoolclubsmanagementsystem.activities.helpActivity;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.schoolclubsmanagementsystem.R;
+import com.example.schoolclubsmanagementsystem.activities.helpActivity.HelpViewModel;
 
 public class HelpFragment extends Fragment {
 
-    private HelpViewModel mViewModel;
+    private HelpViewModel helpViewModel;
 
-    public static HelpFragment newInstance() {
-        return new HelpFragment();
-    }
-
+    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_help, container, false);
-    }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_help, container, false);
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(HelpViewModel.class);
-        // TODO: Use the ViewModel
-    }
+        // Initialize ViewModel
+        helpViewModel = new ViewModelProvider(this).get(HelpViewModel.class);
 
+        // Observe help content
+        TextView helpTextView = root.findViewById(R.id.help_text_view);
+        helpViewModel.getHelpContent().observe(getViewLifecycleOwner(), helpTextView::setText);
+
+        return root;
+    }
 }

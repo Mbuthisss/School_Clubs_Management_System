@@ -34,50 +34,50 @@
             android:transitionName="transition_title_text" />
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email Address"
-            app:startIconDrawable="@drawable/email"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:startIconTint="@color/red"
-            app:hintTextColor="@color/red"
             android:textColorHint="@color/red"
+            app:boxStrokeColor="@color/red"
+            app:boxStrokeWidthFocused="2dp"
             app:endIconMode="clear_text"
             app:endIconTint="@color/black"
-            app:boxStrokeWidthFocused="2dp"
-            app:boxStrokeColor="@color/red" >
+            app:hintTextColor="@color/red"
+            app:startIconDrawable="@drawable/email"
+            app:startIconTint="@color/red">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email_input"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="50dp"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:paddingStart="50dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            app:startIconDrawable="@drawable/password_icon"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:startIconTint="@color/red"
-            app:hintTextColor="@color/red"
             android:textColorHint="@color/red"
+            app:boxStrokeColor="@color/red"
+            app:boxStrokeWidthFocused="2dp"
             app:endIconMode="password_toggle"
+            app:endIconTint="@color/red"
+            app:hintTextColor="@color/red"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@color/black"
-            app:endIconTint="@color/red"
-            app:boxStrokeWidthFocused="2dp"
-            app:boxStrokeColor="@color/red" >
+            app:startIconDrawable="@drawable/password_icon"
+            app:startIconTint="@color/red">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_input"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="50dp"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:paddingStart="50dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,10 +85,10 @@
             android:id="@+id/signup_next_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="NEXT"
+            android:layout_marginTop="20dp"
             android:backgroundTint="@color/red"
             android:onClick="callNextSignupScreen"
-            android:layout_marginTop="20dp"
+            android:text="NEXT"
             android:transitionName="transition_next_btn" />
 
         <TextView
@@ -96,10 +96,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:text="Already have an account?"
+            android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/red"
             android:textSize="15sp"
-            android:textAlignment="center"
             android:textStyle="bold" />
 
         <Button

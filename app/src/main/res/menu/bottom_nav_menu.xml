@@ -2,22 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_announcements"
-        android:icon="@drawable/person"
+        android:icon="@drawable/announcement_icon"
         android:title="Announcements" />
     <item
         android:id="@+id/navigation_enrollments"
-        android:icon="@drawable/person"
+        android:icon="@drawable/people_icon"
         android:title="Enrollments" />
     <item
         android:id="@+id/navigation_events"
-        android:icon="@drawable/person"
+        android:icon="@drawable/event_icon"
         android:title="Events" />
     <item
         android:id="@+id/navigation_payments"
-        android:icon="@drawable/person"
+        android:icon="@drawable/payment_icon"
         android:title="Payments" />
-    <item
-        android:id="@+id/navigation_profile"
-        android:icon="@drawable/person"
-        android:title="Profile" />
 </menu>

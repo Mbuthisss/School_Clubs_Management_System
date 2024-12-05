@@ -17,20 +17,24 @@
         android:id="@+id/navigation_enrollments"
         android:name="com.example.schoolclubsmanagementsystem.activities.clubDashboardUi.enrollments.EnrollmentsFragment"
         android:label="Enrollments"
-        tools:layout="@layout/fragment_enrollments" />
+        tools:layout="@layout/fragment_enrollments">
+        <argument
+            android:name="clubId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_events"
         android:name="com.example.schoolclubsmanagementsystem.activities.clubDashboardUi.events.EventsFragment"
         android:label="Events"
-        tools:layout="@layout/fragment_events" />
+        tools:layout="@layout/fragment_events">
+        <argument
+            android:name="clubId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_payments"
         android:name="com.example.schoolclubsmanagementsystem.activities.clubDashboardUi.payments.PaymentsFragment"
         android:label="Payments"
         tools:layout="@layout/fragment_payments" />
-    <fragment
-        android:id="@+id/navigation_profile"
-        android:name="com.example.schoolclubsmanagementsystem.activities.clubDashboardUi.profile.ProfileFragment"
-        android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+
 </navigation>

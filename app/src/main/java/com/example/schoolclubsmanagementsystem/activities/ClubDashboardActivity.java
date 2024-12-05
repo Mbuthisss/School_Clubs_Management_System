@@ -40,7 +40,7 @@ public class ClubDashboardActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putString("clubId", clubId);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_announcements, R.id.navigation_enrollments, R.id.navigation_events, R.id.navigation_payments, R.id.navigation_profile)
+                R.id.navigation_announcements, R.id.navigation_enrollments, R.id.navigation_events, R.id.navigation_payments)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_club_dashboard);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
