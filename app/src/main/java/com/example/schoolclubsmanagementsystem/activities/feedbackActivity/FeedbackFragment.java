@@ -14,12 +14,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.schoolclubsmanagementsystem.R;
+import com.example.schoolclubsmanagementsystem.activities.feedbackActivity.FeedbackViewModel;
 
 public class FeedbackFragment extends Fragment {
 
     private EditText feedbackEditText;
     private Button submitFeedbackButton;
-    private com.example.schoolclubsmanagementsystem.activities.feedback.FeedbackViewModel feedbackViewModel;
+    private FeedbackViewModel feedbackViewModel;
 
     @Nullable
     @Override
@@ -29,7 +30,7 @@ public class FeedbackFragment extends Fragment {
         feedbackEditText = root.findViewById(R.id.edit_text_feedback);
         submitFeedbackButton = root.findViewById(R.id.button_submit_feedback);
 
-        feedbackViewModel = new ViewModelProvider(this).get(com.example.schoolclubsmanagementsystem.activities.feedback.FeedbackViewModel.class);
+        feedbackViewModel = new ViewModelProvider(this).get(com.example.schoolclubsmanagementsystem.activities.feedbackActivity.FeedbackViewModel.class);
 
         submitFeedbackButton.setOnClickListener(v -> submitFeedback());
 
@@ -43,7 +44,7 @@ public class FeedbackFragment extends Fragment {
             return;
         }
 
-        feedbackViewModel.submitFeedback(feedback, new com.example.schoolclubsmanagementsystem.activities.feedback.FeedbackViewModel.FeedbackCallback() {
+        feedbackViewModel.submitFeedback(feedback, new com.example.schoolclubsmanagementsystem.activities.feedbackActivity.FeedbackViewModel.FeedbackCallback() {
             @Override
             public void onSuccess() {
                 Toast.makeText(getContext(), "Thank you for your feedback!", Toast.LENGTH_SHORT).show();

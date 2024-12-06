@@ -1,4 +1,4 @@
-package com.example.schoolclubsmanagementsystem.activities.feedback;
+package com.example.schoolclubsmanagementsystem.activities.feedbackActivity;
 
 import android.app.Application;
 
